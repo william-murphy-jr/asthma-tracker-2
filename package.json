@@ -1,13 +1,13 @@
 {
-  "name": "github-fetcher-fullstack-v2",
+  "name": "ATracker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build-react": "webpack -d --watch",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/server.js"
   },
-  "author": "Beth Johnson",
+  "author": "William Murphy",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -29,6 +29,7 @@
     "mongoose": "^4.8.6",
     "morgan": "^1.9.1",
     "mysql": "^2.13.0",
+    "path": "^0.12.7",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   }
