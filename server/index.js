@@ -5,6 +5,7 @@ const morgan = require('morgan');
 
 const app = express();
 
+
 // UNCOMMENT FOR REACT
 // app.use(express.static(__dirname + '/../react-client/dist'));
 
@@ -12,7 +13,14 @@ const app = express();
 // app.use(express.static(__dirname + '/../angular-client'));
 // app.use(express.static(__dirname + '/../node_modules'));
 
-app.get('/items', function (req, res) {
+app.use(morgan('dev'));
+
+app.get('/', (req, res) => {
+  console.log('/ route hit');
+  res.send('hello');
+});
+
+app.get('/items', (req, res) => {
   items.selectAll(function(err, data) {
     if(err) {
       res.sendStatus(500);
