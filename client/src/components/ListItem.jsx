@@ -1,9 +1,11 @@
 import React from 'react';
 
-const ListItem = (props) => (
-  <div>
-    { props.item.description }
-  </div>
-)
+const ListItem = ({ item } = props) => {
+  return (
+    <div>
+      { item.comment }
+    </div>
+  );
+};
 
 export default ListItem;

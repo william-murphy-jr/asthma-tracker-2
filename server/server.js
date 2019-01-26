@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const morgan = require('morgan');
+
+const mockData = require('./mock-data');
 // var items = require('../database-mongo');
 
 const app = express();
@@ -29,13 +31,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/items', (req, res) => {
-  items.selectAll((err, data) => {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
+  // items.selectAll((err, data) => {
+  //   if (err) {
+  //     res.sendStatus(500);
+  //   } else {
+  //     res.json(data);
+  //   }
+  // });
+  console.log('mockData: ', JSON.stringify(mockData));
+  res.json(JSON.stringify(mockData));
 });
 
 app.listen(3000, () => {
