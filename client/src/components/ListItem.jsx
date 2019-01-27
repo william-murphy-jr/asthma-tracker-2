@@ -1,10 +1,13 @@
 import React from 'react';
 import RowDataItems from './RowDataItems.jsx';
 
-const ListItem = ({ item } = props) => {
+const ListItem = ({ item, handleChange } = props) => {
   return (
     <div className="row">
-      <RowDataItems item={item} />
+      <RowDataItems
+        item={item}
+        handleChange={handleChange}
+      />
     </div>
   );
 };

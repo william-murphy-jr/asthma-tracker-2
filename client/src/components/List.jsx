@@ -1,7 +1,7 @@
 import React from 'react';
 import ListItem from './ListItem.jsx';
 
-const List = ({ items } = props) => {
+const List = ({ items, handleChange } = props) => {
   console.log('items: ', items);
   return (
     <div className="">
@@ -17,8 +17,14 @@ const List = ({ items } = props) => {
         </div>
       </div>
       {items.map((item, index) => {
-        const key = index + 100;
-        return <ListItem item={item} key={key} />;
+        const key = index;
+        return (
+          <ListItem
+            item={item}
+            key={key}
+            handleChange={handleChange}
+          />
+        );
       })}
     </div>
   );

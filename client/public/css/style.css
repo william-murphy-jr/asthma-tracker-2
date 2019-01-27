@@ -1,3 +1,15 @@
 * {
   outline: 1px solid red;
 }
+
+#data, #time, #peakFlow {
+  padding-right: 8px;
+  text-align: right;
+  width: 12%;
+}
+
+#comment {
+  /* top: 12px !important; */
+  padding-left: 12px;
+  width: 62%;
+}
