@@ -2,8 +2,8 @@ import React from 'react';
 
 const ListItem = ({ item } = props) => {
   return (
-    <div>
-      { item.comment }
+    <div className="card-body">
+      <p className="card-text">{ item.comment }</p>
     </div>
   );
 };
