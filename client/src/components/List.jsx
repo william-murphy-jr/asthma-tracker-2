@@ -4,16 +4,18 @@ import ListItem from './ListItem.jsx';
 const List = ({ items } = props) => {
   console.log('items: ', items);
   return (
-    <div className="card">
-      <div className="card-header">
-        Featured
+    <div className="">
+      <div className="row">
+        <div className="col">
+          <h2>Featured</h2>
+        </div>
       </div>
-      <div className="card-body">
-        <h5 className="card-title">Special title treatment</h5>
-        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <div className="row">
+        <div className="col">
+          <h5 className="">Special title treatment</h5>
+          <p className="">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
       </div>
-      <span>  { items.length } </span>
-      <span>items. </span>
       {items.map((item, index) => {
         const key = index + 100;
         return <ListItem item={item} key={key} />;

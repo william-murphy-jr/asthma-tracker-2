@@ -7,9 +7,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      records: {
+        id: '',
+        date: '',
+        time: '',
+        peakFlow: 0,
+        comment: '',
+      },
       // items: [],
       items: mockData,
-    }
+    };
   }
 
   // componentDidMount() {
@@ -29,9 +36,12 @@ class App extends React.Component {
 
   render() {
     return (
-    <div>
-      <h1>Item List</h1>
-      <List items={this.state.items} />
+    <div className="container-fluid">
+      <h1>Asthama Tracker</h1>
+      <List
+        items={this.state.items}
+        records={this.state.records}
+      />
     </div>
     );
   }
