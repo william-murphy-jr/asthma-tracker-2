@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import mockData from './mock-data';
 import List from './List.jsx';
+import Table from './Table.jsx';
 
 // Import React Table
 import ReactTable from 'react-table';
@@ -54,6 +55,7 @@ class App extends React.Component {
         onBlur={(e) => {
           const data = [...this.state.data];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+          console.log('data: ', data);
           this.setState({ data });
         }}
         dangerouslySetInnerHTML={{
@@ -64,49 +66,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { data } = this.state;
     return (
-      <div>
-        <ReactTable
-          data={data}
-          columns={[
-            {
-              Header: 'Date',
-              accessor: 'date',
-              Cell: this.renderEditable,
-            },
-            {
-              Header: 'Time',
-              accessor: 'time',
-              Cell: this.renderEditable,
-            },
-            {
-              Header: 'Peak Flow',
-              accessor: 'peakFlow',
-              Cell: this.renderEditable,
-            }, {
-              Header: 'Comments',
-              accessor: 'comment',
-              Cell: this.renderEditable,
-            },
-            {
-              Header: 'Full Name',
-              id: 'full',
-              accessor: d =>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: d.firstName + ' ' + d.lastName
-                  }}
-                />
-            }
-          ]}
-          defaultPageSize={10}
-          className='-striped -highlight'
-        />
-        <br />
-        {/* <Tips />
-        <Logo /> */}
-      </div>
+      <Table
+        data={this.state.data}
+        renderEditable={this.renderEditable}
+      />
     );
   }
 }
