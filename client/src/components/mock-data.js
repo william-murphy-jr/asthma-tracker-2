@@ -10,14 +10,14 @@ const record = [
     id: 'dfa8dcd334c36ac9',
     date: '1/26/19',
     time: '12:23 PM',
-    peakFlow: 673,
+    peakFlow: 690,
     comment: 'Slight tightnes still in my chest in the morning.',
   },
   {
     id: 'aca8dcdb8ac36ac9',
     date: '1/26/19',
     time: '9:23 PM',
-    peakFlow: 673,
+    peakFlow: 573,
     comment: 'No tightnes in my chest in the morning.',
   },
   {
@@ -30,13 +30,13 @@ const record = [
     id: 'dfa8dcd334c36ac9',
     date: '1/27/19',
     time: '12:23 PM',
-    peakFlow: 673,
+    peakFlow: 703,
     comment: 'Slight tightnes still in my chest in the morning.',
   }, {
     id: 'aca8dcdb8ac36ac9',
     date: '1/27/19',
     time: '9:23 PM',
-    peakFlow: 673,
+    peakFlow: 773,
     comment: 'No tightnes in my chest in the morning.',
   }
 ];

@@ -1,11 +1,9 @@
 import React from 'react';
-import $ from 'jquery';
 import mockData from './mock-data';
-import List from './List.jsx';
 import Table from './Table.jsx';
+import Titlebar from './Titlebar.jsx';
+import axios from 'axios';
 
-// Import React Table
-import ReactTable from 'react-table';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,26 +23,46 @@ class App extends React.Component {
     };
     // this.handleChange = this.handleChange.bind(this);
     this.renderEditable = this.renderEditable.bind(this);
+    this.getData = this.getData.bind(this);
   }
+
+  componentWillMount() {
+    this.getData();
+  }
+
+  getData() {
+    axios.get('/data')
+      .then((res) => {
+        console.log('res: ', res)
+        this.setState({
+          data: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log('*** then ***', error);
+      });
+  }
+  // }
 
   // componentDidMount() {
   //   $.ajax({
-  //     url: '/items',
+  //     url: '/data',
   //     success: (data) => {
   //       console.log('data: ', mockData);
   //       this.setState({
-  //         items: mockData,
-  //       })
+  //         data: mockData,
+  //       });
   //     },
   //     error: (err) => {
   //       console.log('err', err);
   //     },
   //   });
   // }
-  // handleChange(e) {
-  //   console.log('e.target.id: ', e.target.value);
-  //   this.setState({ records: { [e.target.id]: e.target.value } });
-  // }
+
+  handleChange(e) {
+    console.log('e.target.id: ', e.target.value);
+    this.setState({ records: { [e.target.id]: e.target.value } });
+  }
 
   renderEditable(cellInfo) {
     return (
@@ -67,10 +85,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <Table
-        data={this.state.data}
-        renderEditable={this.renderEditable}
-      />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="offset-2 col-8">
+            <Titlebar />
+            <Table
+              data={this.state.data}
+              renderEditable={this.renderEditable}
+            />
+          </div>
+        </div>
+      </div>
     );
   }
 }

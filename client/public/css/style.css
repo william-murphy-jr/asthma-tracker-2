@@ -59,3 +59,30 @@
 td input {
   width: 50px;
 }
+
+.title-bar {
+  text-align: center;
+}
+
+.rt-td,
+.rt-td.-even {
+  text-align: right;
+  padding-right: 16px;
+}
+
+/* .rt-td div[contenteditable]
+.rt-td.-even div[contenteditable],
+  {
+  padding-right: 16px;
+} */
+
+
+.rt-td:last-of-type {
+  /* padding-left: 16px; */
+  text-align: left;
+}
+
+.rt-td div[contenteditable]:last-of-type {
+  padding-left: 16px;
+  /* text-align: left; */
+}
