@@ -11,8 +11,8 @@
 }
 
 .data-row {
-  padding-top: 4px;
-  padding-bottom: 4px;
+  /* padding-top: 4px;
+  padding-bottom: 4px; */
 }
 
 .data-row:nth-child(odd),
@@ -54,4 +54,8 @@
   /* top: 12px !important; */
   padding-left: 12px;
   width: 62%;
+}
+
+td input {
+  width: 50px;
 }

@@ -16,6 +16,7 @@ class App extends React.Component {
       },
       // items: [],
       items: mockData,
+      // items: mockData,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -37,6 +38,24 @@ class App extends React.Component {
   handleChange(e) {
     console.log('e.target.id: ', e.target.value);
     this.setState({ records: { [e.target.id]: e.target.value } });
+  }
+
+  renderEditable(cellInfo) {
+    return (
+      <div
+        style={{ backgroundColor: "#fafafa" }}
+        contentEditable
+        suppressContentEditableWarning
+        onBlur={e => {
+          const data = [...this.state.data];
+          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+          this.setState({ data });
+        }}
+        dangerouslySetInnerHTML={{
+          __html: this.state.data[cellInfo.index][cellInfo.column.id]
+        }}
+      />
+    );
   }
 
   render() {

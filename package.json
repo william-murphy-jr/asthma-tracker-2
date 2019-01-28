@@ -1,5 +1,5 @@
 {
-  "name": "Asthma Tracker",
+  "name": "Asthma_Tracker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -31,6 +31,7 @@
     "mysql": "^2.13.0",
     "path": "^0.12.7",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-table": "^6.8.6"
   }
 }
