@@ -12,9 +12,6 @@ const app = express();
 // UNCOMMENT FOR REACT
 // app.use(express.static(__dirname + '/../react-client/dist'));
 
-// UNCOMMENT FOR ANGULAR
-// app.use(express.static(__dirname + '/../angular-client'));
-// app.use(express.static(__dirname + '/../node_modules'));
 
 app.use(morgan('dev'));
 
@@ -27,10 +24,11 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.get('/', (req, res) => {
   console.log('/ route hit');
+  // res.json(req.body);
   // res.sendfile('../client/dist/index.html');
 });
 
-app.get('/items', (req, res) => {
+app.get('/data', (req, res) => {
   // items.selectAll((err, data) => {
   //   if (err) {
   //     res.sendStatus(500);
@@ -39,7 +37,7 @@ app.get('/items', (req, res) => {
   //   }
   // });
   console.log('mockData: ', JSON.stringify(mockData));
-  res.json(JSON.stringify(mockData));
+  res.json(mockData);
 });
 
 app.listen(3000, () => {

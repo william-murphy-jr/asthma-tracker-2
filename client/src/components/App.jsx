@@ -9,15 +9,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      records: {
+      average: 0,  
+      data: [{
         id: '',
         date: '',
         time: '',
         peakFlow: 0,
         comment: '',
-      },
-      // items: [],
-      data: mockData,
+      }],
       // data: [],
       // items: mockData,
     };
@@ -33,7 +32,8 @@ class App extends React.Component {
   getData() {
     axios.get('/data')
       .then((res) => {
-        console.log('res: ', res)
+        console.log('res: ', res);
+        console.log('res.data: ', res.data);
         this.setState({
           data: res.data,
         });
@@ -42,22 +42,6 @@ class App extends React.Component {
         console.log('*** then ***', error);
       });
   }
-  // }
-
-  // componentDidMount() {
-  //   $.ajax({
-  //     url: '/data',
-  //     success: (data) => {
-  //       console.log('data: ', mockData);
-  //       this.setState({
-  //         data: mockData,
-  //       });
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     },
-  //   });
-  // }
 
   handleChange(e) {
     console.log('e.target.id: ', e.target.value);
