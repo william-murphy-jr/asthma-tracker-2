@@ -44,16 +44,15 @@ class App extends React.Component {
       <div className="container-fluid">
         <div className="row">
           <div className="offset-2 col-8">
-            <h1>Asthama Tracker</h1>
+            <h1 className="page-title">Daily Asthma Tracker</h1>
             <List
               items={this.state.items}
               records={this.state.records}
               handleChange={this.handleChange}
             />
           </div>
-
         </div>
-    </div>
+      </div>
     );
   }
 }

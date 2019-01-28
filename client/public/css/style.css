@@ -1,8 +1,50 @@
-* {
+/* * {
   outline: 1px solid red;
+} */
+.page-title {
+  margin-top: 24px;
+  text-align: center;
+}
+#header {
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
-#data, #time, #peakFlow {
+.data-row {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.data-row:nth-child(odd),
+.data-row:nth-child(odd) input {
+  background-color: #f7ccff;
+}
+
+#hdr-data,
+#hdr-time,
+#hdr-peakFlow,
+#hdr-comment {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#hdr-data,
+#hdr-time,
+#hdr-peakFlow {
+  /* padding-right: 8px; */
+  width: 12%;
+}
+
+#hdr-comment {
+  /* top: 12px !important; */
+  padding-left: 12px;
+  width: 62%;
+}
+
+#data,
+#time,
+#peakFlow {
   padding-right: 8px;
   text-align: right;
   width: 12%;

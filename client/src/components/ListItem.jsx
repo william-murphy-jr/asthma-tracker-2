@@ -3,7 +3,7 @@ import RowDataItems from './RowDataItems.jsx';
 
 const ListItem = ({ item, handleChange } = props) => {
   return (
-    <div className="row">
+    <div className="row data-row">
       <RowDataItems
         item={item}
         handleChange={handleChange}

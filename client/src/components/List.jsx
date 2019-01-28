@@ -1,5 +1,6 @@
 import React from 'react';
 import ListItem from './ListItem.jsx';
+import Header from './Header.jsx';
 
 const List = ({ items, handleChange } = props) => {
   console.log('items: ', items);
@@ -16,6 +17,7 @@ const List = ({ items, handleChange } = props) => {
           <p className="">With supporting text below as a natural lead-in to additional content.</p>
         </div>
       </div>
+      <Header />
       {items.map((item, index) => {
         const key = index;
         return (

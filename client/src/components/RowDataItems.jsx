@@ -3,7 +3,7 @@ import React from 'react';
 const RowDataItems = ({ item, handleChange } = props) => {
   return (
     <div className="col">
-      <div className="input-group">
+      <div className="">
         <input id="data" className="date" type="text" defaultValue={item.date} onChange={handleChange} />
         <input id="time" className="" type="text" defaultValue={item.time} onChange={handleChange} />
         <input id="peakFlow" className="" type="text" defaultValue={item.peakFlow} onChange={handleChange} />
