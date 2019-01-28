@@ -3,6 +3,9 @@ import $ from 'jquery';
 import mockData from './mock-data';
 import List from './List.jsx';
 
+// Import React Table
+import ReactTable from 'react-table';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -15,10 +18,12 @@ class App extends React.Component {
         comment: '',
       },
       // items: [],
-      items: mockData,
+      data: mockData,
+      // data: [],
       // items: mockData,
     };
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
+    this.renderEditable = this.renderEditable.bind(this);
   }
 
   // componentDidMount() {
@@ -35,42 +40,72 @@ class App extends React.Component {
   //     },
   //   });
   // }
-  handleChange(e) {
-    console.log('e.target.id: ', e.target.value);
-    this.setState({ records: { [e.target.id]: e.target.value } });
-  }
+  // handleChange(e) {
+  //   console.log('e.target.id: ', e.target.value);
+  //   this.setState({ records: { [e.target.id]: e.target.value } });
+  // }
 
   renderEditable(cellInfo) {
     return (
       <div
-        style={{ backgroundColor: "#fafafa" }}
+        style={{ backgroundColor: '#fafafa' }}
         contentEditable
         suppressContentEditableWarning
-        onBlur={e => {
+        onBlur={(e) => {
           const data = [...this.state.data];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
           this.setState({ data });
         }}
         dangerouslySetInnerHTML={{
-          __html: this.state.data[cellInfo.index][cellInfo.column.id]
+          __html: this.state.data[cellInfo.index][cellInfo.column.id],
         }}
       />
     );
   }
 
   render() {
+    const { data } = this.state;
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="offset-2 col-8">
-            <h1 className="page-title">Daily Asthma Tracker</h1>
-            <List
-              items={this.state.items}
-              records={this.state.records}
-              handleChange={this.handleChange}
-            />
-          </div>
-        </div>
+      <div>
+        <ReactTable
+          data={data}
+          columns={[
+            {
+              Header: 'Date',
+              accessor: 'date',
+              Cell: this.renderEditable,
+            },
+            {
+              Header: 'Time',
+              accessor: 'time',
+              Cell: this.renderEditable,
+            },
+            {
+              Header: 'Peak Flow',
+              accessor: 'peakFlow',
+              Cell: this.renderEditable,
+            }, {
+              Header: 'Comments',
+              accessor: 'comment',
+              Cell: this.renderEditable,
+            },
+            {
+              Header: 'Full Name',
+              id: 'full',
+              accessor: d =>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: d.firstName + ' ' + d.lastName
+                  }}
+                />
+            }
+          ]}
+          defaultPageSize={10}
+          className='-striped -highlight'
+        />
+        <br />
+        {/* <Tips />
+        <Logo /> */}
       </div>
     );
   }
