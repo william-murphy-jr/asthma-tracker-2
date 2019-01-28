@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (a) => {
   return (
     <div className="row">
       <div className="col">

@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      average: 0,  
+      avgPeakFlow: 0,
       data: [{
         id: '',
         date: '',
@@ -23,6 +23,7 @@ class App extends React.Component {
     // this.handleChange = this.handleChange.bind(this);
     this.renderEditable = this.renderEditable.bind(this);
     this.getData = this.getData.bind(this);
+    this.calcPeakFlowAvg = this.calcPeakFlowAvg.bind(this);
   }
 
   componentWillMount() {
@@ -37,10 +38,25 @@ class App extends React.Component {
         this.setState({
           data: res.data,
         });
+        return res.data;
+      })
+      .then(() => {
+        this.setState({avgPeakFlow: this.calcPeakFlowAvg(this.state.data)});
       })
       .catch((error) => {
         console.log('*** then ***', error);
       });
+  }
+
+  calcPeakFlowAvg(data) {
+    console.log('calc peak flow data: ', data);
+    let output = 0;
+    output = data.reduce((acc, item) => {
+      return acc + parseInt(item.peakFlow, 10);
+    }, 0);
+
+    console.log('pAve: ', output / data.length);
+    return Math.round(output / data.length);
   }
 
   handleChange(e) {
@@ -59,6 +75,8 @@ class App extends React.Component {
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
           console.log('data: ', data);
           this.setState({ data });
+          this.setState({ avgPeakFlow: this.calcPeakFlowAvg(this.state.data) });
+          console.log('avgPeakFlow: ', this.calcPeakFlowAvg(this.state.data));
         }}
         dangerouslySetInnerHTML={{
           __html: this.state.data[cellInfo.index][cellInfo.column.id],
