@@ -95,13 +95,13 @@ class App extends React.Component {
     //     len += 1;
     //   }
     // }
-
-    output = data.reduce((acc, item) => {
+    const tempData = data.slice(0, data.length - 1);
+    output = tempData.reduce((acc, item) => {
       return acc + parseInt(item.peakFlow, 10);
     }, 0);
 
-    console.log('pAve: ', output / this.state.data.length);
-    return Math.round(output / this.state.data.length);
+    console.log('pAve: ', output / tempData.length);
+    return Math.round(output / tempData.length);
   } // calcPeakFlowAvg
 
   // handleChange(e) {
