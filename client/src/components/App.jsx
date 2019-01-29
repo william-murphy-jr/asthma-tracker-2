@@ -1,6 +1,7 @@
 import React from 'react';
 import mockData from './mock-data';
 import Table from './Table.jsx';
+import DisplayPeakFlow from './DisplayPeakFlow.jsx';
 import Titlebar from './Titlebar.jsx';
 import axios from 'axios';
 
@@ -49,7 +50,7 @@ class App extends React.Component {
   }
 
   calcPeakFlowAvg(data) {
-    console.log('calc peak flow data: ', data);
+    // console.log('calc psak flow data: ', data);
     let output = 0;
     output = data.reduce((acc, item) => {
       return acc + parseInt(item.peakFlow, 10);
@@ -91,6 +92,9 @@ class App extends React.Component {
         <div className="row">
           <div className="offset-2 col-8">
             <Titlebar />
+            <DisplayPeakFlow
+              avgPeakFlow={this.state.avgPeakFlow}
+            />
             <Table
               data={this.state.data}
               renderEditable={this.renderEditable}

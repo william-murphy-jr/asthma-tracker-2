@@ -10,7 +10,7 @@ const record = [
     id: 'dfa8dcd33df36ac9',
     date: '1/28/19',
     time: '12:23 PM',
-    peakFlow: 890,
+    peakFlow: 884,
     comment: 'Slight tightnes still in my chest in the morning.',
   },
   {
