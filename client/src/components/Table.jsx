@@ -33,7 +33,8 @@ const Table = (props) => {
             width: 100,
             'padding-left': '16px',
             Cell: props.renderEditable,
-          }, {
+          },
+          {
             Header: 'Comments',
             accessor: 'comment',
             width: 600,

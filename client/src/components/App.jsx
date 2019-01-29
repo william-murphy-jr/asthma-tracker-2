@@ -1,5 +1,5 @@
 import React from 'react';
-import mockData from './mock-data';
+import mockData from './_mock-data';
 import Table from './Table.jsx';
 import DisplayPeakFlow from './DisplayPeakFlow.jsx';
 import Titlebar from './Titlebar.jsx';
@@ -15,15 +15,17 @@ class App extends React.Component {
         id: '',
         date: '',
         time: '',
-        peakFlow: 0,
+        peakFlow: '',
         comment: '',
       }],
       // data: [],
       // items: mockData,
     };
     // this.handleChange = this.handleChange.bind(this);
+    this.checkDataFields = this.checkDataFields.bind(this);
     this.renderEditable = this.renderEditable.bind(this);
     this.getData = this.getData.bind(this);
+    this.postData = this.postData.bind(this);
     this.calcPeakFlowAvg = this.calcPeakFlowAvg.bind(this);
   }
 
@@ -32,7 +34,7 @@ class App extends React.Component {
   }
 
   getData() {
-    axios.get('/data')
+    axios.get('/records')
       .then((res) => {
         console.log('res: ', res);
         console.log('res.data: ', res.data);
@@ -48,22 +50,64 @@ class App extends React.Component {
         console.log('*** then ***', error);
       });
   }
+  
+  postData() {
+    const data = this.state.data;
+    console.log(' check post data NOW!!!: ', data);
+    
+    if (this.checkDataFields(data)) {
+      console.log('data posted NOW!!!: ', data);
+      axios.post('/records', data)
+        .then((res) => {
+          console.log('res: ', res);
+          console.log('res.data: ', res.data);
+          // this.setState({
+          //   data: res.data,
+          // });
+          return res.data;
+        })
+        .catch((error) => {
+          console.log('*** Error ***', error);
+        });
+    } else {
+      console.log('All data fields not filled out');
+      return;
+    }
+  }
+
+  checkDataFields(data) {
+    console.log('checkDataFields: ', data);
+    return false;
+
+  }
 
   calcPeakFlowAvg(data) {
     // console.log('calc psak flow data: ', data);
     let output = 0;
+    let len = 0;
+
+    // for(let i = 0; i < data.length; i++) {
+    //   let pkflw = +data[i].peakFlow
+    //   console.log('typeoof pkflw: ', typeof pkflw);
+    //   console.log('pkflw: ', pkflw);
+    //   if(spkflw !== '') {
+    //     output += pkflw;
+    //     len += 1;
+    //   }
+    // }
+
     output = data.reduce((acc, item) => {
       return acc + parseInt(item.peakFlow, 10);
     }, 0);
 
-    console.log('pAve: ', output / data.length);
-    return Math.round(output / data.length);
-  }
+    console.log('pAve: ', output / this.state.data.length);
+    return Math.round(output / this.state.data.length);
+  } // calcPeakFlowAvg
 
-  handleChange(e) {
-    console.log('e.target.id: ', e.target.value);
-    this.setState({ records: { [e.target.id]: e.target.value } });
-  }
+  // handleChange(e) {
+  //   console.log('e.target.id: ', e.target.value);
+  //   this.setState({ records: { [e.target.id]: e.target.value } });
+  // }
 
   renderEditable(cellInfo) {
     return (
@@ -74,10 +118,11 @@ class App extends React.Component {
         onBlur={(e) => {
           const data = [...this.state.data];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          console.log('data: ', data);
           this.setState({ data });
           this.setState({ avgPeakFlow: this.calcPeakFlowAvg(this.state.data) });
+          console.log('data from innetHtml: ', data);
           console.log('avgPeakFlow: ', this.calcPeakFlowAvg(this.state.data));
+          this.postData(); // send data back
         }}
         dangerouslySetInnerHTML={{
           __html: this.state.data[cellInfo.index][cellInfo.column.id],

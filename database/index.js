@@ -11,21 +11,45 @@ db.once('open', function () {
   console.log('mongoose connected successfully');
 });
 
-const itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String,
+const recordSchema = mongoose.Schema({
+  date: String,
+  time: String,
+  peakFlow: String,
+  comment: String,
 });
 
-const Item = mongoose.model('Item', itemSchema);
+const Record = mongoose.model('Record', recordSchema);
 
 const selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Record.find({}, function(err, records) {
     if(err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      callback(null, records);
     }
   });
 };
 
-module.exports.selectAll = selectAll;
+const addRecord = (body, callback) => {
+  const record = new Record({
+    date: body.date,
+    time: body.time,
+    peakFlow: body.peakFlow,
+    comment: body.comment,
+  });
+
+  record.save((err, result) => {
+    if (err) {
+      console.log('Error :', err);
+      callback(err, null);
+    } else {
+      console.log('Your query returned: ', result);
+      callback(null, result);
+    }
+  });
+};
+
+module.exports = {
+  selectAll,
+  addRecord,
+};
