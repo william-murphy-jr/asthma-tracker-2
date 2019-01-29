@@ -1,24 +1,24 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/peakflow');
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
-db.on('error', function() {
+db.on('error', function () {
   console.log('mongoose connection error');
 });
 
-db.once('open', function() {
+db.once('open', function () {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
+const itemSchema = mongoose.Schema({
   quantity: Number,
-  description: String
+  description: String,
 });
 
-var Item = mongoose.model('Item', itemSchema);
+const Item = mongoose.model('Item', itemSchema);
 
-var selectAll = function(callback) {
+const selectAll = function(callback) {
   Item.find({}, function(err, items) {
     if(err) {
       callback(err, null);
