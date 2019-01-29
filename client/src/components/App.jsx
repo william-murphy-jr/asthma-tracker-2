@@ -85,17 +85,11 @@ class App extends React.Component {
     // console.log('calc psak flow data: ', data);
     let output = 0;
     let len = 0;
-
-    // for(let i = 0; i < data.length; i++) {
-    //   let pkflw = +data[i].peakFlow
-    //   console.log('typeoof pkflw: ', typeof pkflw);
-    //   console.log('pkflw: ', pkflw);
-    //   if(spkflw !== '') {
-    //     output += pkflw;
-    //     len += 1;
-    //   }
-    // }
+    
+    // Remove the last element of the array. It should be a filled with
+    // all empty quotes ('') so we do not want to include this in our calcs.
     const tempData = data.slice(0, data.length - 1);
+
     output = tempData.reduce((acc, item) => {
       return acc + parseInt(item.peakFlow, 10);
     }, 0);
