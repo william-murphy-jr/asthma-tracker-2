@@ -4,8 +4,14 @@ import ReactTable from 'react-table';
 
 
 const Table = (props) => {
-  const holder = { id: "", date: "", time: "", peakFlow: '', comment: "" }
+  const holder = { id: "", date: "", time: "", peakFlow: '', comment: "" };
+  const tmpData = props.data;
+  if ( tmpData[tmpData.length - 1].peakFlow !== '' &&
+    tmpData[tmpData.length - 1].date !== '') {
+    props.data.push(holder);
+  }
   // console.log('what do we need props: ', props.data.push(holder));
+
   const { data } = props;
   console.log('what do we need props: ', props.data);
   return (
