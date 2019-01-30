@@ -6,6 +6,6 @@ const Footer = ({ onSubmit }) => {
       <button className="table-submit-btn" onClick={onSubmit} >Submit</button>
     </div>
   );
-}
+};
 
 export default Footer;
