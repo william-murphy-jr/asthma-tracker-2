@@ -18,10 +18,8 @@ class App extends React.Component {
         peakFlow: '',
         comment: '',
       }],
-      // data: [],
-      // items: mockData,
     };
-    // this.handleChange = this.handleChange.bind(this);
+
     this.cleanDataFields = this.cleanDataFields.bind(this);
     this.renderEditable = this.renderEditable.bind(this);
     this.getData = this.getData.bind(this);
@@ -56,7 +54,6 @@ class App extends React.Component {
     let data = this.state.data.slice();
     console.log(' check post data NOW!!!: ', data);
     
-    // if (this.checkDataFields(data)) {
     const cleanData = (this.checkDataFields(data));
     
     console.log('We just posted this data to the SERVER!!!: ', cleanData);
@@ -79,7 +76,6 @@ class App extends React.Component {
     console.log('checkDataFields check the last row: ', data[data.length - 1]);
 
     for (let i = 0; i < data.length; i++) {
-      // const tmpData = data[data.length - 1];
       if (data.date !== '' &&
         data.time !== '' &&
         data.peakFlow !== '' && data.comment !== '') {
@@ -101,7 +97,6 @@ class App extends React.Component {
   }
 
   calcPeakFlowAvg(data) {
-    // console.log('calc peak flow data: ', data);
     let output = 0;
     let len = 0;
     
