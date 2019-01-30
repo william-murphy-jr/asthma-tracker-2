@@ -25,9 +25,6 @@ app.get('/', (req, res) => {
       res.json(results);
     }
   });
-  
-  // res.json(req.body);
-  // res.sendfile('../client/dist/index.html');
 });
 
 app.get('/records', (req, res) => {
@@ -40,9 +37,8 @@ app.get('/records', (req, res) => {
     }
   });
 
-  // console.log('mockData: ', JSON.stringify(mockData));
-  // res.json(mockData);
-  // res.json({});
+  // Keep below line for testing
+  // res.json(mockData)
 });
 
 app.post('/records', (req, res) => {
