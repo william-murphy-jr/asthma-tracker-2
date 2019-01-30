@@ -1,13 +1,15 @@
 import React from 'react';
 import $ from 'jquery';
 import ReactTable from 'react-table';
+import Footer from './Footer.jsx';
 
 
 const Table = (props) => {
   const holder = { id: "", date: "", time: "", peakFlow: '', comment: "" };
-  const tmpData = props.data;
-  if ( tmpData[tmpData.length - 1].peakFlow !== '' &&
-    tmpData[tmpData.length - 1].date !== '') {
+  const tmpData = props.data[props.data.length - 1];
+  if ( tmpData.date !== '' &&
+    tmpData.time !== '' &&
+    tmpData.peakFlow !== '' && tmpData.comment !== '') {
     props.data.push(holder);
   }
   // console.log('what do we need props: ', props.data.push(holder));
@@ -51,8 +53,9 @@ const Table = (props) => {
         className='-striped -highlight'
       />
       <br />
-      {/* <Tips />
-      <Logo /> */}
+     {/* Tip component */}
+      <Footer onSubmit={props.onSubmit} />
+      
     </div>
   );
 }

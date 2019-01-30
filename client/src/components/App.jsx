@@ -22,11 +22,12 @@ class App extends React.Component {
       // items: mockData,
     };
     // this.handleChange = this.handleChange.bind(this);
-    this.checkDataFields = this.checkDataFields.bind(this);
+    this.cleanDataFields = this.cleanDataFields.bind(this);
     this.renderEditable = this.renderEditable.bind(this);
     this.getData = this.getData.bind(this);
     this.postData = this.postData.bind(this);
     this.calcPeakFlowAvg = this.calcPeakFlowAvg.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -52,37 +53,55 @@ class App extends React.Component {
   }
   
   postData() {
-    const data = this.state.data;
+    let data = this.state.data.slice();
     console.log(' check post data NOW!!!: ', data);
     
-    if (this.checkDataFields(data)) {
-      console.log('data posted NOW!!!: ', data);
-      axios.post('/records', data)
-        .then((res) => {
-          console.log('res: ', res);
-          console.log('res.data: ', res.data);
-          // this.setState({
-          //   data: res.data,
-          // });
-          return res.data;
-        })
-        .catch((error) => {
-          console.log('*** Error ***', error);
-        });
+    // if (this.checkDataFields(data)) {
+    const cleanData = (this.checkDataFields(data));
+    
+    console.log('We just posted this data to the SERVER!!!: ', cleanData);
+    axios.post('/records', cleanData)
+      .then((res) => {
+        console.log('res: ', res);
+        console.log('res.data: ', res.data);
+        // this.setState({
+        //   data: res.data,
+        // });
+        return res.data;
+      })
+      .catch((error) => {
+        console.log('*** Error ***', error);
+      });
+  }
+
+  cleanDataFields(data) {
+    console.log('checkDataFields: ', data);
+    console.log('checkDataFields check the last row: ', data[data.length - 1]);
+
+    for (let i = 0; i < data.length; i++) {
+      // const tmpData = data[data.length - 1];
+      if (data.date !== '' &&
+        data.time !== '' &&
+        data.peakFlow !== '' && data.comment !== '') {
+          data.pop();
+          return data;
+      } else {
+        return data;
+      }
+    }
+
+    const tmpData = data[data.length - 1];
+    if (tmpData.date !== '' &&
+      tmpData.time !== '' &&
+      tmpData.peakFlow !== '' && tmpData.comment !== '') {
+      return true;
     } else {
-      console.log('All data fields not filled out');
-      return;
+      return false;
     }
   }
 
-  checkDataFields(data) {
-    console.log('checkDataFields: ', data);
-    return false;
-
-  }
-
   calcPeakFlowAvg(data) {
-    // console.log('calc psak flow data: ', data);
+    // console.log('calc peak flow data: ', data);
     let output = 0;
     let len = 0;
     
@@ -96,7 +115,12 @@ class App extends React.Component {
 
     console.log('pAve: ', output / tempData.length);
     return Math.round(output / tempData.length);
-  } // calcPeakFlowAvg
+  } // 
+  
+  onSubmit() {
+    console.log('submit btn clicked');
+    this.postData(); // send data back
+  }
 
   // handleChange(e) {
   //   console.log('e.target.id: ', e.target.value);
@@ -116,7 +140,6 @@ class App extends React.Component {
           this.setState({ avgPeakFlow: this.calcPeakFlowAvg(this.state.data) });
           console.log('data from innetHtml: ', data);
           console.log('avgPeakFlow: ', this.calcPeakFlowAvg(this.state.data));
-          this.postData(); // send data back
         }}
         dangerouslySetInnerHTML={{
           __html: this.state.data[cellInfo.index][cellInfo.column.id],
@@ -137,7 +160,9 @@ class App extends React.Component {
             <Table
               data={this.state.data}
               renderEditable={this.renderEditable}
+              onSubmit={this.onSubmit}
             />
+
           </div>
         </div>
       </div>

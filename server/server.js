@@ -5,7 +5,7 @@ const morgan = require('morgan');
 // const selectAll = require('../database/index.js');
 const db = require('../database/index.js');
 
-// const mockData = require('./_mock-data');
+const mockData = require('./_mock-data');
 // var items = require('../database-mongo');
 
 const app = express();
@@ -18,17 +18,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser());
 
-// app.get('/', express.static(`${__dirname}./../public`));
-// app.get('/', express.static(`${__dirname}./../client/dist`));
-// app.use('/', express.static(__dirname + '../public'));
-// app.use(express.static(path.join(__dirname, 'client/public')));
-// app.use('/', express.static(path.join(__dirname, 'client/dist')));
-
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.get('/', (req, res) => {
   console.log('/ route hit');
 
-  
   db.selectAll((err, results) => {
     if (err) {
       res.status(501).send();
@@ -43,13 +36,13 @@ app.get('/', (req, res) => {
 
 app.get('/records', (req, res) => {
 
-  db.selectAll((err, results) => {
-    if (err) {
-      res.status(501).send();
-    } else {
-      res.json(results);
-    }
-  });
+  // db.selectAll((err, results) => {
+  //   if (err) {
+  //     res.status(501).send();
+  //   } else {
+  //     res.json(results);
+  //   }
+  // });
 
   // console.log('mockData: ', JSON.stringify(mockData));
   // res.json(mockData);

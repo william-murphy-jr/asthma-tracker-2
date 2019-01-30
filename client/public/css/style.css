@@ -54,3 +54,7 @@
   padding-left: 16px;
   /* text-align: left; */
 }
+
+.table-submit-btn {
+  width: 100%;
+}
