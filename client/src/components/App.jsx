@@ -54,7 +54,7 @@ class App extends React.Component {
     let data = this.state.data.slice();
     console.log(' check post data NOW!!!: ', data);
     
-    const cleanData = (this.checkDataFields(data));
+    const cleanData = (this.cleanDataFields(data));
     
     console.log('We just posted this data to the SERVER!!!: ', cleanData);
     axios.post('/records', cleanData)
@@ -72,8 +72,8 @@ class App extends React.Component {
   }
 
   cleanDataFields(data) {
-    console.log('checkDataFields: ', data);
-    console.log('checkDataFields check the last row: ', data[data.length - 1]);
+    console.log('cleanDataFields: ', data);
+    console.log('cleanDataFields check the last row: ', data[data.length - 1]);
 
     for (let i = 0; i < data.length; i++) {
       if (data.date !== '' &&
@@ -97,7 +97,7 @@ class App extends React.Component {
   }
 
   calcPeakFlowAvg(data) {
-    let output = 0;
+    let output = 0; 
     let len = 0;
     
     // Remove the last element of the array. It should be a filled with

@@ -2,18 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const morgan = require('morgan');
-// const selectAll = require('../database/index.js');
 const db = require('../database/index.js');
 
 const mockData = require('./_mock-data');
-// var items = require('../database-mongo');
 
 const app = express();
 
-
 // UNCOMMENT FOR REACT
 // app.use(express.static(__dirname + '/../react-client/dist'));
-
 
 app.use(morgan('dev'));
 app.use(bodyParser());
@@ -36,13 +32,13 @@ app.get('/', (req, res) => {
 
 app.get('/records', (req, res) => {
 
-  // db.selectAll((err, results) => {
-  //   if (err) {
-  //     res.status(501).send();
-  //   } else {
-  //     res.json(results);
-  //   }
-  // });
+  db.selectAll((err, results) => {
+    if (err) {
+      res.status(501).send();
+    } else {
+      res.json(results);
+    }
+  });
 
   // console.log('mockData: ', JSON.stringify(mockData));
   // res.json(mockData);
